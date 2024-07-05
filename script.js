@@ -1,30 +1,24 @@
 const container = document.querySelector("#container");
 
 const content = document.querySelector(".content");
+const toReset = document.querySelector("#reset");
 
-let divRows = "";
-let divColumns = "";
-
-function gridRowsColumns(rows, column) {
-    for (let i = 0; i < column; i++) {
-        divColumns = document.createElement("div");
+function gridRowsColumns(size) {
+    for (let i = 0; i < size; i++) {
+        const divColumns = document.createElement("div");
 
         container.appendChild(divColumns).className = "makeColumns";
     }
 
-    for (let j = 0; j < rows; j++) {
-        divRows = document.createElement("div");
+    for (let j = 0; j < size; j++) {
+        const divRows = document.createElement("div");
 
         container.appendChild(divRows).className = "makeRows";
     }
-}
 
-gridRowsColumns(16, 16);
+    const rows = document.querySelectorAll(".makeRows");
+    const columns = document.querySelectorAll(".makeColumns");
 
-const rows = document.querySelectorAll(".makeRows");
-const columns = document.querySelectorAll(".makeColumns");
-
-function randomizeColor() {
     rows.forEach((row) => {
         row.addEventListener("mouseover", (event) => {
             event.target.style.backgroundColor = "red";
@@ -38,21 +32,38 @@ function randomizeColor() {
     });
 }
 
-const toReset = document.querySelector("#reset");
+gridRowsColumns(16);
 
 function resetGrid() {
     toReset.addEventListener("click", () => {
-        rows.forEach((row) => {
-            row.style.backgroundColor = "white";
+        document.querySelectorAll(".makeRows").forEach((row) => {
+            row.style.backgroundColor = "";
         });
     });
 
     toReset.addEventListener("click", () => {
-        columns.forEach((cell) => {
-            cell.style.backgroundColor = "white";
+        document.querySelectorAll(".makeColumns").forEach((cell) => {
+            cell.style.backgroundColor = "";
         });
     });
 }
 
-randomizeColor();
+function createNewGrid() {
+    const create = document.querySelector("#create");
+
+    create.addEventListener("click", () => {
+        const inputGridSize = parseInt(
+            prompt("Set a size. Between 2-100: ", 10)
+        );
+
+        if (inputGridSize >= 2 && inputGridSize <= 100) {
+            container.replaceChildren();
+            gridRowsColumns(inputGridSize);
+        } else {
+            alert("Please enter a number between 2-100");
+        }
+    });
+}
+
+createNewGrid();
 resetGrid();
