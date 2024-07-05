@@ -3,6 +3,13 @@
     padding: 0;
 }
 
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0px 20px 0px;
+}
+
 .makeColumns,
 .makeRows {
     border: 1px solid black;
@@ -17,14 +24,20 @@
     flex-wrap: wrap;
 }
 
-.reset-container {
+.button-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
     margin-top: 50px;
 }
 
 #reset {
     width: 100px;
+    height: 50px;
+}
+
+#create {
+    width: 110px;
     height: 50px;
 }
